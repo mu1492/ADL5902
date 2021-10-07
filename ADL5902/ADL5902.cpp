@@ -59,7 +59,7 @@ ADL5902::~ADL5902()
 //!************************************************************************
 double ADL5902::getRfPower
     (
-    const double aVoltage           //!< a voltage in Volts
+    const double aVoltage           //!< voltage in Volts
     )
 {
     double rfPwr = -99;   // dBm
@@ -80,7 +80,7 @@ double ADL5902::getRfPower
 //!************************************************************************
 bool ADL5902::setFrequency
     (
-    const double aFrequencyGhz      //!< frequency in Ghz
+    const double aFrequencyGhz      //!< frequency in GHz
     )
 {
     bool couldSet( false );

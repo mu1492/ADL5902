@@ -54,12 +54,12 @@ class ADL5902
 
         bool setFrequency
             (
-            const double aFrequencyGhz      //!< frequency in Ghz
+            const double aFrequencyGhz      //!< frequency in GHz
             );
 
         double getRfPower
             (
-            const double aVoltage           //!< a voltage in Volts
+            const double aVoltage           //!< voltage in Volts
             );
 
     private:
