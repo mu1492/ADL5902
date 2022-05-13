@@ -48,15 +48,27 @@ double adConvert
 void setup()
 {
     Serial.begin( 9600 );
-    Serial.print( "Setting f [GHz] = " ); Serial.println( freqGhz, 4 ); 
+    Serial.print( "Setting f [GHz] = " ); 
+    Serial.println( freqGhz, 4 );
     adl5902.setFrequency( freqGhz );
 }
 
 void loop() 
 {
-    int vOutRaw = analogRead( A0 );
-    double vOut = adConvert( vOutRaw );    
-    double pwrDbm = adl5902.getRfPower( vOut ); 
-    Serial.print( "RF pwr = " ); Serial.print( pwrDbm, 3 ); Serial.println( " dBm" );   
-    delay( 1000 );
+    const uint8_t SAMPLES_COUNT = 5;
+    double pwrDbmAvg = 0;
+
+    for( int i = 0; i < SAMPLES_COUNT; i++ )
+    {
+        int vOutRaw = analogRead( A0 );
+        double vOut = adConvert( vOutRaw );
+        double pwrDbm = adl5902.getRfPower( vOut );
+        pwrDbmAvg += pwrDbm;
+        delay( 1000 / SAMPLES_COUNT );
+    }
+
+    pwrDbmAvg /= SAMPLES_COUNT;
+    Serial.print( "RF pwr = " ); 
+    Serial.print( pwrDbmAvg, 1 ); 
+    Serial.println( " dBm" ); 
 }
